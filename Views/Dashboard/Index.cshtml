@@ -1,0 +1,219 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid dashboard-bg py-4">
+
+    <h2 class="mb-4 text-center">My Job Application Dashboard</h2>
+
+    <!-- STATS AND RATES CARDS -->
+    <div class="row g-3 mb-4">
+
+        <!-- TOTAL APPLICATIONS CARD -->
+        <div class="col-md-8">
+            <div class="card stats-card h-100 p-4 animate-card">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-briefcase fa-2x me-3 text-primary"></i>
+                        <h5 class="mb-0 text-muted">Total Applications</h5>
+                    </div>
+                    <h1 class="mb-0">@ViewBag.Total</h1>
+                </div>
+
+                <hr />
+
+                <div class="row text-center">
+                    <div class="col-3">
+                        <i class="fas fa-paper-plane text-info mb-1"></i>
+                        <p class="mb-0 text-muted">Applied</p>
+                        <h5>@ViewBag.Applied</h5>
+                    </div>
+                    <div class="col-3">
+                        <i class="fas fa-comments text-warning mb-1"></i>
+                        <p class="mb-0 text-muted">Interviews</p>
+                        <h5>@ViewBag.Interview</h5>
+                    </div>
+                    <div class="col-3">
+                        <i class="fas fa-handshake text-success mb-1"></i>
+                        <p class="mb-0 text-muted">Offers</p>
+                        <h5>@ViewBag.Offer</h5>
+                    </div>
+                    <div class="col-3">
+                        <i class="fas fa-times-circle text-danger mb-1"></i>
+                        <p class="mb-0 text-muted">Rejected</p>
+                        <h5>@ViewBag.Rejected</h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SUCCESS RATES CARD -->
+        <div class="col-md-4">
+            <div class="card rates-card h-100 p-4 text-center animate-card">
+
+                <h5 class="text-muted mb-3">Success Rates</h5>
+
+                <div class="mb-3">
+                    <i class="fas fa-star text-primary mb-1"></i>
+                    <p class="mb-0 text-muted">Interview Rate</p>
+                    <h3 class="text-primary">@ViewBag.InterviewRate %</h3>
+                </div>
+
+                <hr />
+
+                <div>
+                    <i class="fas fa-trophy text-success mb-1"></i>
+                    <p class="mb-0 text-muted">Offer Rate</p>
+                    <h3 class="text-success">@ViewBag.OfferRate %</h3>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CHARTS ROW -->
+    <div class="row g-3">
+
+        <!-- BAR CHART -->
+        <div class="col-md-6">
+            <div class="card chart-card h-100 p-3 animate-card">
+                <h5 class="mb-3 text-muted"><i class="fas fa-chart-bar me-2"></i>Status Overview</h5>
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+
+        <!-- LINE CHART -->
+        <div class="col-md-6">
+            <div class="card chart-card h-100 p-3 animate-card">
+                <h5 class="mb-3 text-muted"><i class="fas fa-chart-line me-2"></i>Applications Over Time</h5>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FONT AWESOME FOR ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<!-- CHART.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // -------------------------------
+        // BAR CHART: Status Overview
+        // -------------------------------
+        var barCtx = document.getElementById('statusChart');
+        if (barCtx) {
+            new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Applied', 'Interview', 'Offer', 'Rejected'],
+                    datasets: [{
+                        label: 'Applications',
+                        data: [
+                            @ViewBag.Applied ?? 0,
+                            @ViewBag.Interview ?? 0,
+                            @ViewBag.Offer ?? 0,
+                            @ViewBag.Rejected ?? 0
+                        ],
+                        backgroundColor: [
+                            '#4e73df', // Blue
+                            '#f6c23e', // Yellow
+                            '#1cc88a', // Green
+                            '#e74a3b'  // Red
+                        ],
+                        borderRadius: 8,        // Rounded bars
+                        barPercentage: 0.6      // Narrower bars
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1200,       // 1.2s animation
+                        easing: 'easeOutQuart'
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#343a40',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            padding: 10,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1 }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // -------------------------------
+        // LINE CHART: Applications Over Time
+        // -------------------------------
+        var lineCtx = document.getElementById('lineChart');
+        if (lineCtx) {
+            var labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Dates));
+            var data = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Counts));
+
+            new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Applications Over Time',
+                        data: data,
+                        borderColor: '#4e73df',
+                        backgroundColor: 'rgba(78,115,223,0.15)',
+                        tension: 0.3,     // Smooth curves
+                        fill: true,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#4e73df'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        duration: 1200,
+                        easing: 'easeOutQuart'
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#343a40',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            padding: 10,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { stepSize: 1 } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+    });
+</script>

@@ -1,0 +1,93 @@
+﻿@model JobApplicationTracker.JobApplication
+
+
+@{
+    ViewData["Title"] = "Edit Application";
+}
+
+<h2 class="text-center mb-4">Edit Application</h2>
+
+<div class="container">
+    <div class="card form-card p-4 col-md-6 mx-auto">
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="CompanyName"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Role"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Status"></label>
+                <select asp-for="Status" class="form-select">
+                    <option>Applied</option>
+                    <option>Interview</option>
+                    <option>Offer</option>
+                    <option>Rejected</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DateApplied"></label>
+                <input asp-for="DateApplied" type="date" class="form-control" />
+                <span asp-validation-for="DateApplied" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="InterviewDate"></label>
+                <input asp-for="InterviewDate" type="date" class="form-control" />
+                <span asp-validation-for="InterviewDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Notes"></label>
+                <textarea asp-for="Notes" class="form-control"></textarea>
+            </div>
+
+            <!-- FILE UPLOAD -->
+            <div class="mb-3">
+                <label for="ResumeFile" class="form-label">Upload New CV (optional)</label>
+                <input type="file" name="ResumeFile" id="ResumeFile" class="form-control" />
+            </div>
+
+            <!-- Show existing CV if available -->
+            @if (!string.IsNullOrEmpty(Model.ResumePath))
+            {
+                <div class="mb-3">
+                    <label class="form-label">Current CV:</label>
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="@Model.ResumePath" target="_blank" class="btn btn-outline-primary btn-sm">
+                            View Current CV
+                        </a>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="RemoveCV" id="RemoveCV" value="true" />
+                            <label class="form-check-label" for="RemoveCV">Remove CV</label>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Back</a>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

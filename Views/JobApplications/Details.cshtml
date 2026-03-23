@@ -1,0 +1,81 @@
+﻿@model JobApplicationTracker.JobApplication
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container py-5">
+
+    <div class="details-card p-4 mb-4">
+
+        <h2 class="text-heading mb-3">Application Details</h2>
+        <hr class="divider" />
+
+        <dl class="row">
+
+            <dt class="col-sm-3 text-muted-custom">Company</dt>
+            <dd class="col-sm-9 text-soft">@Model.CompanyName</dd>
+
+            <dt class="col-sm-3 text-muted-custom">Role</dt>
+            <dd class="col-sm-9 text-soft">@Model.Role</dd>
+
+            <dt class="col-sm-3 text-muted-custom">Status</dt>
+            <dd class="col-sm-9 text-soft">@Model.Status</dd>
+
+            <dt class="col-sm-3 text-muted-custom">Date Applied</dt>
+            <dd class="col-sm-9 text-soft">
+                @Model.DateApplied.ToString("MMM dd, yyyy")
+            </dd>
+
+            <dt class="col-sm-3 text-muted-custom">Notes</dt>
+            <dd class="col-sm-9 text-soft">@Model.Notes</dd>
+
+        </dl>
+    </div>
+
+    <!-- 🔥 Timeline -->
+    <div class="details-card p-4 mb-4">
+
+        <h4 class="text-heading">Status Timeline</h4>
+
+        <div class="timeline mt-3">
+            @foreach (var history in Model.ApplicationHistories
+                        .OrderByDescending(h => h.ChangedDate))
+            {
+                <div class="timeline-item">
+
+                    <div class="timeline-dot @(history.Status.ToLower() == "offer" ? "bg-success" :
+                                                                        history.Status.ToLower() == "rejected" ? "bg-danger" :
+                                                                        history.Status.ToLower() == "interview" ? "bg-warning" :
+                                                                        "bg-primary")">
+                    </div>
+
+                    <div class="timeline-content">
+                        <strong class="text-soft">
+                            @(history.Status == "Offer" ? "🎉 " :
+                                                    history.Status == "Rejected" ? "❌ " :
+                                                    history.Status == "Interview" ? "📅 " : "📌 ")
+                            @history.Status
+                        </strong>
+
+                        <div class="text-muted-custom small">
+                            @history.ChangedDate.ToString("MMM dd, yyyy HH:mm")
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- 🔥 Actions -->
+    <div class="text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">
+            Edit
+        </a>
+        <a asp-action="Index" class="btn btn-outline-light">
+            Back to List
+        </a>
+    </div>
+
+</div>

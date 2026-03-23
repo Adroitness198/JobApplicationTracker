@@ -1,0 +1,452 @@
+
+/* GLOBAL BACKGROUND*/
+html, body {
+    background: url('/images/Job-search.png') no-repeat center center fixed !important;
+    background-size: cover !important;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    /* DARK OVERLAY */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: -1;
+    }
+
+/* REMOVE WHITE BACKGROUNDS */
+.container,
+.container-fluid,
+.bg-white {
+    background: transparent !important;
+}
+
+/*NAVBAR */
+.navbar {
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+    .navbar a {
+        color: #fff !important;
+    }
+
+/* APPLICATION CARDS */
+.app-card {
+    position: relative;
+    /* DARK GLASS FOR READABILITY */
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+    /* HOVER */
+    .app-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    /* LEFT STATUS STRIPE */
+    .app-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 15px;
+        bottom: 15px;
+        width: 5px;
+        border-radius: 10px;
+    }
+
+/*STATUS COLORS*/
+.status-applied::before {
+    background: #0d6efd;
+}
+
+.status-interview::before {
+    background: #6f42c1;
+}
+
+.status-offer::before {
+    background: #198754;
+}
+
+.status-rejected::before {
+    background: #dc3545;
+}
+
+/* SUBTLE BACKGROUND TINT */
+.status-applied {
+    background: rgba(13, 110, 253, 0.15);
+}
+
+.status-interview {
+    background: rgba(111, 66, 193, 0.15);
+}
+
+.status-offer {
+    background: rgba(25, 135, 84, 0.15);
+}
+
+.status-rejected {
+    background: rgba(220, 53, 69, 0.15);
+}
+
+
+
+/* COMPANY NAME  */
+.company-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* ROLE PILL */
+.role-pill {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.15);
+    font-size: 0.8rem;
+}
+
+/* DATE */
+.date-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 10px;
+}
+
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+/* Group buttons */
+.action-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        transform: translateY(-2px);
+    }
+
+.btn-danger {
+    background-color: #e74a3b;
+    border: none;
+}
+
+    .btn-danger:hover {
+        transform: translateY(-2px);
+    }
+
+
+.form-card {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.form-control,
+.form-select,
+textarea {
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+    .form-control::placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+
+    .form-control:focus {
+        background: rgba(255,255,255,0.15);
+        border-color: #4e73df;
+        box-shadow: none;
+        color: #fff;
+    }
+
+
+.pagination .page-link {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+}
+
+    .pagination .page-link:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+
+.animate-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .company-name {
+        font-size: 1.2rem;
+    }
+
+    .app-card {
+        padding: 15px;
+    }
+}
+
+/* SEARCH INPUT */
+#searchInput {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000 !important;
+    border-radius: 10px;
+    border: none;
+    padding: 8px 12px;
+}
+
+    #searchInput::placeholder {
+        color: #666;
+    }
+
+/* STATUS FILTER DROPDOWN */
+#statusFilter {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000 !important;
+    border-radius: 10px;
+    border: none;
+}
+
+/* SEARCH BUTTON */
+button[type="submit"] {
+    background: #4e73df;
+    color: #fff;
+    border-radius: 10px;
+}
+/* STATS CARDS */
+.stats-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000 !important;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Numbers */
+.stats-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Labels */
+.stats-label {
+    color: #555;
+}
+
+#searchInput:focus {
+    box-shadow: 0 0 10px rgba(78, 115, 223, 0.6);
+}
+
+.modal-content {
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    border-radius: 15px;
+}
+/* Login card matches application cards */
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Inputs styled for dark theme */
+.custom-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+}
+
+    .custom-input:focus {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.3);
+    }
+
+
+.form-floating label {
+    color: #ccc;
+}
+
+/* Button  */
+.btn-primary {
+    background-color: #4e73df;
+    border: none;
+    border-radius: 10px;
+}
+
+    .btn-primary:hover {
+        background-color: #2e59d9;
+    }
+.login-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .login-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+/* Glass Card */
+.details-card {
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Text styles */
+.text-heading {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.text-soft {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.text-muted-custom {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Divider */
+.divider {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/*Timeline */
+.timeline {
+    position: relative;
+    padding-left: 20px;
+}
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+    }
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 30px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+/* Timeline content */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .timeline-content:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+
+/* Buttons */
+.btn-outline-light {
+    border-color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.8);
+}
+
+    .btn-outline-light:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+.hero-section {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+   
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.hero-buttons .btn {
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 10px;
+}

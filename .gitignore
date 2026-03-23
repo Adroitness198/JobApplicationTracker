@@ -1,0 +1,14 @@
+﻿namespace JobApplicationTracker
+{
+    public class _
+    {
+        .vs/
+bin/
+obj/
+wwwroot/uploads/
+*.user
+*.suo
+*.log
+appsettings.Development.json
+    }
+}
