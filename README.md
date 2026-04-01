@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/26420438/README.md)
+
 # 📋 Job Application Tracker
 
 A full-stack web application that helps job seekers stay organized by tracking their job applications in one place.
@@ -73,8 +73,10 @@ A full-stack web application that helps job seekers stay organized by tracking t
 
 ## 📸 Screenshots
 
-
+<img width="1431" height="817" alt="Screenshot 2026-03-22 151103" src="https://github.com/user-attachments/assets/32e41137-9589-41fa-97ef-42bc8a4e7e4b" />
 ---
+![Uploading Screensho<img width="1865" height="931" alt="Screenshot 2026-03-21 204527" src="https://github.com/user-attachments/assets/396ee8b2-0263-40e9-8568-fc371509fa9a" />
+t 2026-03-22 151103.png…]()
 
 ## 👤 Author
 
