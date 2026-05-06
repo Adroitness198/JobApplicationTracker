@@ -27,7 +27,6 @@
             <option>Rejected</option>
         </select>
 
-        
         <button type="submit" class="btn btn-primary">
             Search
         </button>
@@ -54,12 +53,12 @@
                 <p class="mb-1"><strong>Role:</strong> @item.Role</p>
                 <p class="mb-1"><strong>Date Applied:</strong> @item.DateApplied.ToShortDateString()</p>
 
-                @if(item.InterviewDate != null)
+                @if (item.InterviewDate != null)
                 {
                     <p class="mb-1"><strong>Interview:</strong> @item.InterviewDate?.ToShortDateString()</p>
                 }
 
-                @if(item.ResumePath != null)
+                @if (item.ResumePath != null)
                 {
                     <a href="@item.ResumePath" target="_blank" class="btn btn-sm btn-outline-primary mb-2">View Resume</a>
                 }
@@ -86,19 +85,16 @@
         })
 </div>
 
-
-
-
-
 <div>
     @Html.PagedListPager(Model, page => Url.Action("Index", new
         {
         page,
         searchString = ViewData["CurrentFilter"] ?? "",
-        statusFilter = ViewData["CurrentStatusFilter"] ?? "" 
+        statusFilter = ViewData["CurrentStatusFilter"] ?? ""
         }))
 </div>
 
+<!-- DELETE MODAL -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -131,6 +127,12 @@
 </div>
 
 <script>
+    function openDeleteModal(id) {
+        document.getElementById("deleteForm").action = "/JobApplications/Delete/" + id;
+        var modal = new bootstrap.Modal(document.getElementById("deleteModal"));
+        modal.show();
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
 
         const searchInput = document.getElementById("searchInput");
@@ -145,7 +147,6 @@
                 const company = card.dataset.company;
                 const status = card.dataset.status;
 
-              
                 const matchesSearch = company.includes(searchText);
                 const matchesStatus = !statusText || status === statusText;
 
@@ -157,10 +158,8 @@
             });
         }
 
-       
         searchInput.addEventListener("input", filterApps);
         statusFilter.addEventListener("change", filterApps);
 
     });
 </script>
-
